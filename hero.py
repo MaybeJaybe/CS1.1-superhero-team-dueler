@@ -2,6 +2,7 @@ import random
 from ability import Ability
 from armor import Armor
 from weapon import Weapon
+from team import Team
 
 class Hero:
     def __init__(self, name, starting_health=100):
@@ -50,8 +51,15 @@ class Hero:
             return False
 
     def fight(self, opponent):
+        print(f"{self.name} has these abilities:")
+        for a in self.abilities:
+            print(a.name)
+
+        print(f"{opponent.name} has these abilities:")
+        for a in opponent.abilities:
+            print(a.name)
         # check if any heroes have abilities. if no hero has abilities, print draw
-        if self.abilities == 0 and opponent.abilities == 0:
+        if len(self.abilities) == 0 and len(opponent.abilities) == 0:
             print("The battle is a draw, neither hero is able to attack.")
             return
         # else, start fighting loop until hero has won
@@ -123,9 +131,11 @@ if __name__ == "__main__":
     hero2.add_ability(ability4)
     hero1.add_weapon(weapon1)
     hero2.add_weapon(weapon2)
+    # hero_list.add_hero(hero1)
+    # print(view_all_heroes)
     # print(hero1.attack())
     # print(hero2.attack())
-    # hero1.fight(hero2)
+    hero1.fight(hero2)
 
 
 
