@@ -14,6 +14,8 @@ class Hero:
         # abilities list and armors list
         self.abilities = list()
         self.armors = list()
+        self.deaths = 0
+        self.kills = 0
 
     def add_armor(self, armor):
         self.armors.append(armor)
@@ -49,6 +51,13 @@ class Hero:
             return True
         else: 
             return False
+
+    def add_kill(self, num_kills):
+        self.kills += num_kills
+
+    def add_death(self, num_deaths):
+        self.deaths += num_deaths
+
 
     def fight(self, opponent):
         print(f"{self.name} has these abilities:")
@@ -97,12 +106,19 @@ class Hero:
             # after each attack, check if self or opponent is alive
             # if one died, print "hero name won!"
             if not self.is_alive() and not opponent.is_alive():
+                self.add_death()
+                opponent.add_death()
                 print("Stalemate, both heroes died from their wounds.")
 
             elif not self.is_alive():
+                self.add_death()
+                opponent.add_kill()
+
                 print(f"{opponent.name} won with {opponent.current_health} hp left.")
 
             elif not opponent.is_alive():
+                opponent.add_death()
+                self.add_kill()
                 print(f"{self.name} won with {self.current_health} hp left.")
 
 
